@@ -156,3 +156,59 @@
 - [x] DefaultUnitOfMeasureSeeder
 - [x] DefaultProductSeeder
 
+## 🔄 Phase 3 — Business Partner Domain
+### Migrations
+- [ ] Create payment_terms table migration
+- [ ] Create business_partners table migration
+- [ ] Create contact_persons table migration
+
+### Models
+- [ ] Create PaymentTerm model
+- [ ] Create BusinessPartner model
+- [ ] Create ContactPerson model
+
+### Repositories
+- [ ] Create PaymentTermRepository
+- [ ] Create BusinessPartnerRepository
+- [ ] Create ContactPersonRepository
+
+### Services
+- [ ] Create PaymentTermService
+- [ ] Create BusinessPartnerService
+- [ ] Create ContactPersonService
+
+### Form Requests
+- [ ] Create StorePaymentTermRequest, UpdatePaymentTermRequest
+- [ ] Create StoreBusinessPartnerRequest, UpdateBusinessPartnerRequest
+- [ ] Create StoreContactPersonRequest, UpdateContactPersonRequest
+
+### Policies
+- [ ] Create PaymentTermPolicy
+- [ ] Create BusinessPartnerPolicy
+- [ ] Create ContactPersonPolicy
+
+### Controllers
+- [ ] Create PaymentTermController
+- [ ] Create BusinessPartnerController
+- [ ] Create ContactPersonController
+
+### Routes
+- [ ] Add business partner routes
+
+### Blade Views
+- [ ] Payment Terms: index, create, edit, _actions
+- [ ] Business Partners: index, create, edit, show, _actions
+- [ ] Contact Persons: index, create, edit, _actions
+
+### Update Existing Files
+- [ ] Update AuthServiceProvider.php
+- [ ] Update sidebar.blade.php
+- [ ] Update RoleAndPermissionSeeder.php
+
+### Seeders
+- [ ] Create DefaultPaymentTermSeeder
+- [ ] Create DefaultBusinessPartnerSeeder
+
+### Finalize
+- [ ] Run migrations and seeders
+
