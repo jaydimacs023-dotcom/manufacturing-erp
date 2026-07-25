@@ -334,6 +334,274 @@ Example
 [Create Purchase Order]
 
 ---
+---
+
+# Searchable Selection Components
+
+## Philosophy
+
+The ERP shall prioritize speed and efficiency for daily users.
+
+Whenever a form requires selecting data from a potentially large dataset, the system shall use a searchable lookup component instead of a standard HTML select element.
+
+---
+
+# Standard Lookup Component
+
+Every lookup field shall provide:
+
+- Search while typing
+- Keyboard navigation
+- Mouse selection
+- Clear selection
+- Loading indicator
+- No page reload
+- Server-side search
+- Pagination for large datasets
+
+---
+
+# User Interaction
+
+Example
+
+Product
+
+[____________________]
+
+User types
+
+ban
+
+↓
+
+System immediately displays
+
+• Banana Chips Original 100g
+• Banana Chips BBQ 100g
+• Banana Chips Cheese 100g
+• Banana Saba Raw
+
+↓
+
+User selects one item
+
+↓
+
+Store the selected Product ID
+
+Display the Product Name
+
+---
+
+# Search Behavior
+
+The component shall begin searching after:
+
+Minimum
+
+2 characters
+
+Debounce
+
+300 milliseconds
+
+Server-side filtering
+
+Required
+
+---
+
+# Search Fields
+
+Products
+
+- Product Code
+- Product Name
+- Barcode (future)
+
+Suppliers
+
+- Supplier Code
+- Supplier Name
+
+Customers
+
+- Customer Code
+- Customer Name
+
+Warehouse
+
+- Warehouse Code
+- Warehouse Name
+
+Bill of Materials
+
+- BOM Number
+- Product Name
+
+Manufacturing Orders
+
+- MO Number
+
+Purchase Orders
+
+- PO Number
+
+Sales Orders
+
+- SO Number
+
+Batch
+
+- Batch Number
+
+---
+
+# Search Results
+
+Display useful information.
+
+Example
+
+Product
+
+--------------------------------------
+
+P000125
+
+Banana Chips Original 100g
+
+Available
+
+2,540 packs
+
+--------------------------------------
+
+P000126
+
+Banana Chips BBQ 100g
+
+Available
+
+890 packs
+
+--------------------------------------
+
+Do not display only the product name.
+
+---
+
+# Performance
+
+Always perform server-side searching.
+
+Never preload thousands of records into the browser.
+
+Avoid loading all products during page initialization.
+
+---
+
+# Selected Item
+
+After selection
+
+Display
+
+Product Code
+
+Product Name
+
+Unit of Measure
+
+Current Stock (when applicable)
+
+Do not expose database IDs.
+
+---
+
+# Keyboard Shortcuts
+
+Recommended
+
+↓ Move Down
+
+↑ Move Up
+
+Enter Select
+
+Esc Close
+
+Tab Next Field
+
+---
+
+# Reusable Component
+
+The ERP shall provide one reusable lookup component.
+
+Examples
+
+<x-searchable-select>
+
+or
+
+<x-lookup-field>
+
+The component shall be configurable.
+
+Example
+
+<x-searchable-select
+    source="products"
+    value="product_id"
+/>
+
+The same component shall support:
+
+- Products
+- Suppliers
+- Customers
+- Warehouses
+- Employees
+- Manufacturing Orders
+- Purchase Orders
+- Sales Orders
+- Batches
+
+without duplication.
+
+---
+
+# Implementation Rules
+
+Search logic belongs in:
+
+LookupService
+
+Repository
+
+Controller
+
+Blade only renders results.
+
+---
+
+# Accessibility
+
+The component shall support:
+
+- Keyboard navigation
+- Screen readers
+- Clear focus indicators
+
+---
+
+# Final Rule
+
+Large datasets shall never use a traditional HTML select element.
+
+All master data selection shall use the standardized Searchable Lookup Component.
 
 # Error States
 
