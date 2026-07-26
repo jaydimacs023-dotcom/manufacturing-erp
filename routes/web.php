@@ -9,6 +9,9 @@ use Modules\Administration\Controllers\DepartmentController;
 use Modules\Administration\Controllers\RoleController;
 use Modules\Administration\Controllers\UserController;
 use Modules\Administration\Controllers\WarehouseController;
+use Modules\BusinessPartner\Controllers\BusinessPartnerController;
+use Modules\BusinessPartner\Controllers\ContactPersonController;
+use Modules\BusinessPartner\Controllers\PaymentTermController;
 use Modules\ProductMaster\Controllers\ProductCategoryController;
 use Modules\ProductMaster\Controllers\ProductController;
 use Modules\ProductMaster\Controllers\ProductSpecificationController;
@@ -70,6 +73,15 @@ Route::middleware('auth')->group(function () {
         Route::resource('products', ProductController::class);
 
         Route::resource('products.specifications', ProductSpecificationController::class)
+            ->except(['show']);
+
+        // Business Partner
+        Route::resource('payment-terms', PaymentTermController::class)
+            ->except(['show']);
+
+        Route::resource('business-partners', BusinessPartnerController::class);
+
+        Route::resource('business-partners.contact-persons', ContactPersonController::class)
             ->except(['show']);
     });
 });

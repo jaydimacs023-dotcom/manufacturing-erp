@@ -27,8 +27,9 @@ class DatabaseSeeder extends Seeder
             DefaultProductCategorySeeder::class,
             DefaultUnitOfMeasureSeeder::class,
             DefaultProductSeeder::class,
+            DefaultPaymentTermSeeder::class,
+            DefaultBusinessPartnerSeeder::class,
             NumberSeriesSeeder::class,
         ]);
     }
 }
-

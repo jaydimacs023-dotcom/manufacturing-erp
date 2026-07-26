@@ -25,6 +25,30 @@
             <span>Dashboard</span>
         </a>
 
+        <!-- Business Partner -->
+        @can('business-partner-view')
+        <div x-data="{ open: {{ request()->routeIs('admin.business-partner*') || request()->routeIs('admin.payment-terms*') ? 'true' : 'false' }} }" class="space-y-1">
+            <button @click="open = !open" class="sidebar-link w-full flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span>Business Partners</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+            <div x-show="open" class="space-y-1 pl-4">
+                <a href="{{ route('admin.business-partners.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.business-partners.*') ? 'active' : '' }}">
+                    <span>All Partners</span>
+                </a>
+                <a href="{{ route('admin.payment-terms.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.payment-terms.*') ? 'active' : '' }}">
+                    <span>Payment Terms</span>
+                </a>
+            </div>
+        @endcan
+
         <!-- Product Master -->
         @can('product-view')
         <div x-data="{ open: {{ request()->routeIs('admin.product*') ? 'true' : 'false' }} }" class="space-y-1">
@@ -50,7 +74,6 @@
                     <span>Units of Measure</span>
                 </a>
             </div>
-        </div>
         @endcan
 
         <!-- Administration -->
@@ -100,7 +123,6 @@
                     <span>Audit Logs</span>
                 </a>
             </div>
-        </div>
         @endcan
     </nav>
 
@@ -116,7 +138,6 @@
                     <p class="font-medium truncate">{{ auth()->user()->name ?? 'User' }}</p>
                     <p class="text-gray-400 truncate text-xs">{{ auth()->user()->email ?? '' }}</p>
                 </div>
-            </div>
             <button type="submit" class="text-gray-400 hover:text-white" title="Logout">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
@@ -140,4 +161,3 @@
         }
     </style>
 </aside>
-

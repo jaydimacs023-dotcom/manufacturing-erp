@@ -12,6 +12,12 @@ use Modules\Administration\Policies\DepartmentPolicy;
 use Modules\Administration\Policies\RolePolicy;
 use Modules\Administration\Policies\UserPolicy;
 use Modules\Administration\Policies\WarehousePolicy;
+use Modules\BusinessPartner\Models\BusinessPartner;
+use Modules\BusinessPartner\Models\ContactPerson;
+use Modules\BusinessPartner\Models\PaymentTerm;
+use Modules\BusinessPartner\Policies\BusinessPartnerPolicy;
+use Modules\BusinessPartner\Policies\ContactPersonPolicy;
+use Modules\BusinessPartner\Policies\PaymentTermPolicy;
 use Modules\ProductMaster\Models\Product;
 use Modules\ProductMaster\Models\ProductCategory;
 use Modules\ProductMaster\Models\ProductSpecification;
@@ -34,6 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         UnitOfMeasure::class => UnitOfMeasurePolicy::class,
         Product::class => ProductPolicy::class,
         ProductSpecification::class => ProductSpecificationPolicy::class,
+        PaymentTerm::class => PaymentTermPolicy::class,
+        BusinessPartner::class => BusinessPartnerPolicy::class,
+        ContactPerson::class => ContactPersonPolicy::class,
     ];
 
     public function boot(): void
@@ -41,4 +50,3 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
     }
 }
-

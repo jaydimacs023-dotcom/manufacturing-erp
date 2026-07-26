@@ -15,6 +15,9 @@ class RoleAndPermissionSeeder extends Seeder
 
         // Create permissions grouped by module
         $permissions = [
+            // Business Partner
+            'business-partner-view', 'business-partner-create', 'business-partner-update', 'business-partner-delete',
+
             // Product Master
             'product-view', 'product-create', 'product-update', 'product-delete',
             'product-category-view', 'product-category-create', 'product-category-update', 'product-category-delete',
@@ -80,6 +83,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $admin = Role::create(['name' => 'Administrator', 'guard_name' => 'web']);
         $admin->givePermissionTo([
+            'business-partner-view', 'business-partner-create', 'business-partner-update', 'business-partner-delete',
             'product-view', 'product-create', 'product-update', 'product-delete',
             'product-category-view', 'product-category-create', 'product-category-update', 'product-category-delete',
             'uom-view', 'uom-create', 'uom-update', 'uom-delete',
@@ -97,6 +101,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $purchasingOfficer = Role::create(['name' => 'Purchasing Officer', 'guard_name' => 'web']);
         $purchasingOfficer->givePermissionTo([
+            'business-partner-view',
             'product-view',
             'product-category-view',
             'uom-view',
@@ -143,6 +148,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $salesOfficer = Role::create(['name' => 'Sales Officer', 'guard_name' => 'web']);
         $salesOfficer->givePermissionTo([
+            'business-partner-view',
             'product-view',
             'product-category-view',
             'uom-view',
@@ -154,6 +160,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $exportOfficer = Role::create(['name' => 'Export Officer', 'guard_name' => 'web']);
         $exportOfficer->givePermissionTo([
+            'business-partner-view',
             'product-view',
             'product-category-view',
             'uom-view',

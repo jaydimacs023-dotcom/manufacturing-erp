@@ -156,59 +156,58 @@
 - [x] DefaultUnitOfMeasureSeeder
 - [x] DefaultProductSeeder
 
-## 🔄 Phase 3 — Business Partner Domain
+## ✅ Phase 3 — Business Partner Domain
 ### Migrations
-- [ ] Create payment_terms table migration
-- [ ] Create business_partners table migration
-- [ ] Create contact_persons table migration
+- [x] Create payment_terms table migration
+- [x] Create business_partners table migration
+- [x] Create contact_persons table migration
 
 ### Models
-- [ ] Create PaymentTerm model
-- [ ] Create BusinessPartner model
-- [ ] Create ContactPerson model
+- [x] Create PaymentTerm model
+- [x] Create BusinessPartner model
+- [x] Create ContactPerson model
 
 ### Repositories
-- [ ] Create PaymentTermRepository
-- [ ] Create BusinessPartnerRepository
-- [ ] Create ContactPersonRepository
+- [x] Create PaymentTermRepository
+- [x] Create BusinessPartnerRepository
+- [x] Create ContactPersonRepository
 
 ### Services
-- [ ] Create PaymentTermService
-- [ ] Create BusinessPartnerService
-- [ ] Create ContactPersonService
+- [x] Create PaymentTermService
+- [x] Create BusinessPartnerService
+- [x] Create ContactPersonService
 
 ### Form Requests
-- [ ] Create StorePaymentTermRequest, UpdatePaymentTermRequest
-- [ ] Create StoreBusinessPartnerRequest, UpdateBusinessPartnerRequest
-- [ ] Create StoreContactPersonRequest, UpdateContactPersonRequest
+- [x] Create StorePaymentTermRequest, UpdatePaymentTermRequest
+- [x] Create StoreBusinessPartnerRequest, UpdateBusinessPartnerRequest
+- [x] Create StoreContactPersonRequest, UpdateContactPersonRequest
 
 ### Policies
-- [ ] Create PaymentTermPolicy
-- [ ] Create BusinessPartnerPolicy
-- [ ] Create ContactPersonPolicy
+- [x] Create PaymentTermPolicy
+- [x] Create BusinessPartnerPolicy
+- [x] Create ContactPersonPolicy
 
 ### Controllers
-- [ ] Create PaymentTermController
-- [ ] Create BusinessPartnerController
-- [ ] Create ContactPersonController
+- [x] Create PaymentTermController
+- [x] Create BusinessPartnerController
+- [x] Create ContactPersonController
 
 ### Routes
-- [ ] Add business partner routes
+- [x] Add business partner routes
 
 ### Blade Views
-- [ ] Payment Terms: index, create, edit, _actions
-- [ ] Business Partners: index, create, edit, show, _actions
-- [ ] Contact Persons: index, create, edit, _actions
+- [x] Payment Terms: index, create, edit, _actions
+- [x] Business Partners: index, create, edit, show, _actions
+- [x] Contact Persons: index, create, edit, _actions
 
 ### Update Existing Files
-- [ ] Update AuthServiceProvider.php
-- [ ] Update sidebar.blade.php
-- [ ] Update RoleAndPermissionSeeder.php
+- [x] Update AuthServiceProvider.php
+- [x] Update sidebar.blade.php
+- [x] Update RoleAndPermissionSeeder.php
 
 ### Seeders
-- [ ] Create DefaultPaymentTermSeeder
-- [ ] Create DefaultBusinessPartnerSeeder
+- [x] Create DefaultPaymentTermSeeder
+- [x] Create DefaultBusinessPartnerSeeder
 
 ### Finalize
 - [ ] Run migrations and seeders
-
