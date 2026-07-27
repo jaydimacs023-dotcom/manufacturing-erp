@@ -12,6 +12,10 @@ use Modules\Administration\Controllers\WarehouseController;
 use Modules\BusinessPartner\Controllers\BusinessPartnerController;
 use Modules\BusinessPartner\Controllers\ContactPersonController;
 use Modules\BusinessPartner\Controllers\PaymentTermController;
+use Modules\Procurement\Controllers\GoodsReceiptController;
+use Modules\Procurement\Controllers\PurchaseOrderController;
+use Modules\Procurement\Controllers\PurchaseRequestController;
+use Modules\Procurement\Controllers\SupplierReturnController;
 use Modules\ProductMaster\Controllers\ProductCategoryController;
 use Modules\ProductMaster\Controllers\ProductController;
 use Modules\ProductMaster\Controllers\ProductSpecificationController;
@@ -83,6 +87,39 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('business-partners.contact-persons', ContactPersonController::class)
             ->except(['show']);
+
+        // Procurement Module
+        Route::resource('purchase-requests', PurchaseRequestController::class);
+        Route::post('purchase-requests/{purchase_request}/submit', [PurchaseRequestController::class, 'submit'])
+            ->name('purchase-requests.submit');
+        Route::post('purchase-requests/{purchase_request}/approve', [PurchaseRequestController::class, 'approve'])
+            ->name('purchase-requests.approve');
+        Route::post('purchase-requests/{purchase_request}/reject', [PurchaseRequestController::class, 'reject'])
+            ->name('purchase-requests.reject');
+        Route::post('purchase-requests/{purchase_request}/cancel', [PurchaseRequestController::class, 'cancel'])
+            ->name('purchase-requests.cancel');
+
+        Route::resource('purchase-orders', PurchaseOrderController::class);
+        Route::post('purchase-orders/{purchase_order}/approve', [PurchaseOrderController::class, 'approve'])
+            ->name('purchase-orders.approve');
+        Route::post('purchase-orders/{purchase_order}/send', [PurchaseOrderController::class, 'send'])
+            ->name('purchase-orders.send');
+        Route::post('purchase-orders/{purchase_order}/close', [PurchaseOrderController::class, 'close'])
+            ->name('purchase-orders.close');
+        Route::post('purchase-orders/{purchase_order}/cancel', [PurchaseOrderController::class, 'cancel'])
+            ->name('purchase-orders.cancel');
+
+        Route::resource('goods-receipts', GoodsReceiptController::class);
+        Route::post('goods-receipts/{goods_receipt}/complete', [GoodsReceiptController::class, 'complete'])
+            ->name('goods-receipts.complete');
+        Route::post('goods-receipts/{goods_receipt}/cancel', [GoodsReceiptController::class, 'cancel'])
+            ->name('goods-receipts.cancel');
+
+        Route::resource('supplier-returns', SupplierReturnController::class);
+        Route::post('supplier-returns/{supplier_return}/complete', [SupplierReturnController::class, 'complete'])
+            ->name('supplier-returns.complete');
+        Route::post('supplier-returns/{supplier_return}/cancel', [SupplierReturnController::class, 'cancel'])
+            ->name('supplier-returns.cancel');
     });
 });
 

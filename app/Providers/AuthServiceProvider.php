@@ -18,6 +18,14 @@ use Modules\BusinessPartner\Models\PaymentTerm;
 use Modules\BusinessPartner\Policies\BusinessPartnerPolicy;
 use Modules\BusinessPartner\Policies\ContactPersonPolicy;
 use Modules\BusinessPartner\Policies\PaymentTermPolicy;
+use Modules\Procurement\Models\GoodsReceipt;
+use Modules\Procurement\Models\PurchaseOrder;
+use Modules\Procurement\Models\PurchaseRequest;
+use Modules\Procurement\Models\SupplierReturn;
+use Modules\Procurement\Policies\GoodsReceiptPolicy;
+use Modules\Procurement\Policies\PurchaseOrderPolicy;
+use Modules\Procurement\Policies\PurchaseRequestPolicy;
+use Modules\Procurement\Policies\SupplierReturnPolicy;
 use Modules\ProductMaster\Models\Product;
 use Modules\ProductMaster\Models\ProductCategory;
 use Modules\ProductMaster\Models\ProductSpecification;
@@ -43,6 +51,10 @@ class AuthServiceProvider extends ServiceProvider
         PaymentTerm::class => PaymentTermPolicy::class,
         BusinessPartner::class => BusinessPartnerPolicy::class,
         ContactPerson::class => ContactPersonPolicy::class,
+        PurchaseRequest::class => PurchaseRequestPolicy::class,
+        PurchaseOrder::class => PurchaseOrderPolicy::class,
+        GoodsReceipt::class => GoodsReceiptPolicy::class,
+        SupplierReturn::class => SupplierReturnPolicy::class,
     ];
 
     public function boot(): void

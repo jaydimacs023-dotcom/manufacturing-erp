@@ -35,10 +35,11 @@ class RoleAndPermissionSeeder extends Seeder
             'number-series-view', 'number-series-create', 'number-series-update', 'number-series-delete',
 
             // Procurement
-            'purchase-request-view', 'purchase-request-create', 'purchase-request-update', 'purchase-request-approve', 'purchase-request-delete',
-            'purchase-order-view', 'purchase-order-create', 'purchase-order-update', 'purchase-order-approve', 'purchase-order-delete',
-            'goods-receipt-view', 'goods-receipt-create', 'goods-receipt-approve',
-            'supplier-return-view', 'supplier-return-create', 'supplier-return-approve',
+            'procurement-view',
+            'purchase-request-view', 'purchase-request-create', 'purchase-request-update', 'purchase-request-approve', 'purchase-request-reject', 'purchase-request-submit', 'purchase-request-cancel', 'purchase-request-delete',
+            'purchase-order-view', 'purchase-order-create', 'purchase-order-update', 'purchase-order-approve', 'purchase-order-send', 'purchase-order-close', 'purchase-order-cancel', 'purchase-order-delete',
+            'goods-receipt-view', 'goods-receipt-create', 'goods-receipt-update', 'goods-receipt-complete', 'goods-receipt-cancel', 'goods-receipt-delete',
+            'supplier-return-view', 'supplier-return-create', 'supplier-return-update', 'supplier-return-complete', 'supplier-return-cancel', 'supplier-return-delete',
 
             // Inventory
             'inventory-view', 'inventory-adjust', 'inventory-transfer',
@@ -73,15 +74,15 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ];
 
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission, 'guard_name' => 'web']);
+foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
-        // Create roles and assign permissions
-        $superAdmin = Role::create(['name' => 'Super Admin', 'guard_name' => 'web']);
+// Create roles and assign permissions
+        $superAdmin = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'web']);
         $superAdmin->givePermissionTo(Permission::all());
 
-        $admin = Role::create(['name' => 'Administrator', 'guard_name' => 'web']);
+        $admin = Role::firstOrCreate(['name' => 'Administrator', 'guard_name' => 'web']);
         $admin->givePermissionTo([
             'business-partner-view', 'business-partner-create', 'business-partner-update', 'business-partner-delete',
             'product-view', 'product-create', 'product-update', 'product-delete',
@@ -96,23 +97,29 @@ class RoleAndPermissionSeeder extends Seeder
             'settings-view', 'settings-update',
             'audit-view',
             'number-series-view', 'number-series-create', 'number-series-update', 'number-series-delete',
+            'procurement-view',
+            'purchase-request-view', 'purchase-request-create', 'purchase-request-update', 'purchase-request-approve', 'purchase-request-reject', 'purchase-request-submit', 'purchase-request-cancel', 'purchase-request-delete',
+            'purchase-order-view', 'purchase-order-create', 'purchase-order-update', 'purchase-order-approve', 'purchase-order-send', 'purchase-order-close', 'purchase-order-cancel', 'purchase-order-delete',
+            'goods-receipt-view', 'goods-receipt-create', 'goods-receipt-update', 'goods-receipt-complete', 'goods-receipt-cancel', 'goods-receipt-delete',
+            'supplier-return-view', 'supplier-return-create', 'supplier-return-update', 'supplier-return-complete', 'supplier-return-cancel', 'supplier-return-delete',
             'dashboard-view',
         ]);
 
-        $purchasingOfficer = Role::create(['name' => 'Purchasing Officer', 'guard_name' => 'web']);
-        $purchasingOfficer->givePermissionTo([
+$purchasingOfficer = Role::firstOrCreate(['name' => 'Purchasing Officer', 'guard_name' => 'web']);
+$purchasingOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
             'product-category-view',
             'uom-view',
-            'purchase-request-view', 'purchase-request-create', 'purchase-request-update',
-            'purchase-order-view', 'purchase-order-create', 'purchase-order-update',
-            'goods-receipt-view', 'goods-receipt-create',
-            'supplier-return-view', 'supplier-return-create',
+            'procurement-view',
+            'purchase-request-view', 'purchase-request-create', 'purchase-request-update', 'purchase-request-submit', 'purchase-request-cancel',
+            'purchase-order-view', 'purchase-order-create', 'purchase-order-update', 'purchase-order-send', 'purchase-order-close',
+            'goods-receipt-view', 'goods-receipt-create', 'goods-receipt-update', 'goods-receipt-complete', 'goods-receipt-cancel',
+            'supplier-return-view', 'supplier-return-create', 'supplier-return-update', 'supplier-return-complete', 'supplier-return-cancel',
             'dashboard-view',
         ]);
 
-        $warehouseStaff = Role::create(['name' => 'Warehouse Staff', 'guard_name' => 'web']);
+$warehouseStaff = Role::firstOrCreate(['name' => 'Warehouse Staff', 'guard_name' => 'web']);
         $warehouseStaff->givePermissionTo([
             'product-view',
             'product-category-view',
@@ -126,7 +133,7 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ]);
 
-        $productionSupervisor = Role::create(['name' => 'Production Supervisor', 'guard_name' => 'web']);
+$productionSupervisor = Role::firstOrCreate(['name' => 'Production Supervisor', 'guard_name' => 'web']);
         $productionSupervisor->givePermissionTo([
             'product-view',
             'product-category-view',
@@ -138,7 +145,7 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ]);
 
-        $qualityInspector = Role::create(['name' => 'Quality Inspector', 'guard_name' => 'web']);
+$qualityInspector = Role::firstOrCreate(['name' => 'Quality Inspector', 'guard_name' => 'web']);
         $qualityInspector->givePermissionTo([
             'inspection-view', 'inspection-create', 'inspection-approve',
             'non-conformance-view', 'non-conformance-create',
@@ -146,7 +153,7 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ]);
 
-        $salesOfficer = Role::create(['name' => 'Sales Officer', 'guard_name' => 'web']);
+$salesOfficer = Role::firstOrCreate(['name' => 'Sales Officer', 'guard_name' => 'web']);
         $salesOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
@@ -158,7 +165,7 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ]);
 
-        $exportOfficer = Role::create(['name' => 'Export Officer', 'guard_name' => 'web']);
+$exportOfficer = Role::firstOrCreate(['name' => 'Export Officer', 'guard_name' => 'web']);
         $exportOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
@@ -170,7 +177,7 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ]);
 
-        $accountingOfficer = Role::create(['name' => 'Accounting Officer', 'guard_name' => 'web']);
+$accountingOfficer = Role::firstOrCreate(['name' => 'Accounting Officer', 'guard_name' => 'web']);
         $accountingOfficer->givePermissionTo([
             'product-view',
             'product-category-view',

@@ -25,6 +25,36 @@
             <span>Dashboard</span>
         </a>
 
+        <!-- Procurement -->
+        @can('procurement-view')
+        <div x-data="{ open: {{ request()->routeIs('admin.purchase-request*') || request()->routeIs('admin.purchase-order*') || request()->routeIs('admin.goods-receipt*') || request()->routeIs('admin.supplier-return*') ? 'true' : 'false' }} }" class="space-y-1">
+            <button @click="open = !open" class="sidebar-link w-full flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/>
+                    </svg>
+                    <span>Procurement</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform" :class="open ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+            <div x-show="open" class="space-y-1 pl-4">
+                <a href="{{ route('admin.purchase-requests.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.purchase-requests.*') ? 'active' : '' }}">
+                    <span>Purchase Requests</span>
+                </a>
+                <a href="{{ route('admin.purchase-orders.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.purchase-orders.*') ? 'active' : '' }}">
+                    <span>Purchase Orders</span>
+                </a>
+                <a href="{{ route('admin.goods-receipts.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.goods-receipts.*') ? 'active' : '' }}">
+                    <span>Goods Receipts</span>
+                </a>
+                <a href="{{ route('admin.supplier-returns.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.supplier-returns.*') ? 'active' : '' }}">
+                    <span>Supplier Returns</span>
+                </a>
+            </div>
+        @endcan
+
         <!-- Business Partner -->
         @can('business-partner-view')
         <div x-data="{ open: {{ request()->routeIs('admin.business-partner*') || request()->routeIs('admin.payment-terms*') ? 'true' : 'false' }} }" class="space-y-1">
@@ -78,7 +108,7 @@
 
         <!-- Administration -->
         @can('view-administration')
-        <div x-data="{ open: {{ request()->routeIs('admin.*') ? 'true' : 'false' }} }" class="space-y-1">
+        <div x-data="{ open: {{ request()->routeIs('admin.dashboard') || request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*') || request()->routeIs('admin.branches.*') || request()->routeIs('admin.warehouses.*') || request()->routeIs('admin.departments.*') || request()->routeIs('admin.company.*') || request()->routeIs('admin.number-series.*') || request()->routeIs('admin.settings.*') || request()->routeIs('admin.audit-logs.*') ? 'true' : 'false' }} }" class="space-y-1">
             <button @click="open = !open" class="sidebar-link w-full flex items-center justify-between">
                 <div class="flex items-center space-x-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,3 +191,4 @@
         }
     </style>
 </aside>
+

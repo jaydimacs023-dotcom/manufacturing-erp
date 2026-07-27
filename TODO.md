@@ -210,4 +210,71 @@
 - [x] Create DefaultBusinessPartnerSeeder
 
 ### Finalize
-- [ ] Run migrations and seeders
+- [x] Run migrations and seeders
+
+## ✅ Phase 4 — Procurement Domain
+### PHP Enums
+- [x] Create PurchaseRequestStatus, PurchaseOrderStatus, GoodsReceiptStatus, SupplierReturnStatus, Priority
+
+### Migrations
+- [x] Create purchase_requests table migration
+- [x] Create purchase_request_items table migration
+- [x] Create purchase_orders table migration
+- [x] Create purchase_order_items table migration
+- [x] Create goods_receipts table migration
+- [x] Create goods_receipt_items table migration
+- [x] Create supplier_returns table migration
+- [x] Create supplier_return_items table migration
+
+### Models
+- [x] Create PurchaseRequest, PurchaseRequestItem models
+- [x] Create PurchaseOrder, PurchaseOrderItem models
+- [x] Create GoodsReceipt, GoodsReceiptItem models
+- [x] Create SupplierReturn, SupplierReturnItem models
+
+### Repositories
+- [x] Create PurchaseRequestRepository, PurchaseRequestItemRepository
+- [x] Create PurchaseOrderRepository, PurchaseOrderItemRepository
+- [x] Create GoodsReceiptRepository, GoodsReceiptItemRepository
+- [x] Create SupplierReturnRepository, SupplierReturnItemRepository
+
+### Services
+- [x] Create PurchaseRequestService
+- [x] Create PurchaseOrderService
+- [x] Create GoodsReceiptService
+- [x] Create SupplierReturnService
+
+### Form Requests
+- [x] Create StorePurchaseRequestRequest, UpdatePurchaseRequestRequest
+- [x] Create StorePurchaseOrderRequest, UpdatePurchaseOrderRequest
+- [x] Create StoreGoodsReceiptRequest, UpdateGoodsReceiptRequest
+- [x] Create StoreSupplierReturnRequest, UpdateSupplierReturnRequest
+
+### Policies
+- [x] Create PurchaseRequestPolicy
+- [x] Create PurchaseOrderPolicy
+- [x] Create GoodsReceiptPolicy
+- [x] Create SupplierReturnPolicy
+
+### Controllers
+- [x] Create PurchaseRequestController
+- [x] Create PurchaseOrderController
+- [x] Create GoodsReceiptController
+- [x] Create SupplierReturnController
+
+### Routes
+- [x] Add procurement routes to web.php
+
+### Blade Views
+- [x] Purchase Requests: index, create, edit, show, _actions
+- [x] Purchase Orders: index, create, edit, show, _actions
+- [x] Goods Receipts: index, create, show, _actions
+- [x] Supplier Returns: index, create, show, _actions
+
+### Update Existing Files
+- [x] Update AuthServiceProvider.php
+- [x] Update sidebar.blade.php
+- [x] Update RoleAndPermissionSeeder.php
+
+### Finalize
+- [x] Run migrations and seeders

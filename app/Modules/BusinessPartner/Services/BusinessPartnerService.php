@@ -57,6 +57,11 @@ class BusinessPartnerService
         return $this->businessPartnerRepository->findByType($type);
     }
 
+    public function getSuppliers()
+    {
+        return $this->businessPartnerRepository->findByType('supplier');
+    }
+
     private function getPrefixForType(string $type): string
     {
         $prefixes = [
