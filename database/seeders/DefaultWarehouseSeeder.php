@@ -45,7 +45,10 @@ class DefaultWarehouseSeeder extends Seeder
         ];
 
         foreach ($warehouses as $warehouse) {
-            Warehouse::create($warehouse);
+            Warehouse::firstOrCreate(
+                ['warehouse_code' => $warehouse['warehouse_code']],
+                $warehouse
+            );
         }
     }
 }

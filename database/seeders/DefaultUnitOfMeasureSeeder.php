@@ -23,16 +23,18 @@ class DefaultUnitOfMeasureSeeder extends Seeder
         ];
 
         foreach ($uoms as $uom) {
-            DB::table('units_of_measure')->insert([
-                'uuid' => (string) Str::uuid(),
-                'uom_code' => $uom['uom_code'],
-                'uom_name' => $uom['uom_name'],
-                'uom_type' => $uom['uom_type'],
-                'is_active' => true,
-                'created_by' => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]);
+            DB::table('units_of_measure')->updateOrInsert(
+                ['uom_code' => $uom['uom_code']],
+                [
+                    'uuid' => (string) Str::uuid(),
+                    'uom_name' => $uom['uom_name'],
+                    'uom_type' => $uom['uom_type'],
+                    'is_active' => true,
+                    'created_by' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
         }
     }
 }

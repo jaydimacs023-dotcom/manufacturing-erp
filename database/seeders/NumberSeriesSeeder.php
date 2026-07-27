@@ -48,7 +48,10 @@ class NumberSeriesSeeder extends Seeder
         ];
 
         foreach ($series as $item) {
-            NumberSeries::create($item);
+            NumberSeries::firstOrCreate(
+                ['document_type' => $item['document_type']],
+                $item
+            );
         }
     }
 }

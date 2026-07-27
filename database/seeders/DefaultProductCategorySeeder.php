@@ -19,16 +19,18 @@ class DefaultProductCategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            DB::table('product_categories')->insert([
-                'uuid' => (string) Str::uuid(),
-                'category_code' => $category['category_code'],
-                'category_name' => $category['category_name'],
-                'description' => $category['description'],
-                'is_active' => true,
-                'created_by' => 1,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]);
+            DB::table('product_categories')->updateOrInsert(
+                ['category_code' => $category['category_code']],
+                [
+                    'uuid' => (string) Str::uuid(),
+                    'category_name' => $category['category_name'],
+                    'description' => $category['description'],
+                    'is_active' => true,
+                    'created_by' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
         }
     }
 }

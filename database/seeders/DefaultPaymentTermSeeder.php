@@ -83,6 +83,11 @@ class DefaultPaymentTermSeeder extends Seeder
             ],
         ];
 
-        DB::table('payment_terms')->insert($terms);
+        foreach ($terms as $term) {
+            DB::table('payment_terms')->updateOrInsert(
+                ['term_code' => $term['term_code']],
+                $term
+            );
+        }
     }
 }

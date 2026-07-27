@@ -113,6 +113,11 @@ class DefaultBusinessPartnerSeeder extends Seeder
             ],
         ];
 
-        DB::table('business_partners')->insert($partners);
+        foreach ($partners as $partner) {
+            DB::table('business_partners')->updateOrInsert(
+                ['partner_code' => $partner['partner_code']],
+                $partner
+            );
+        }
     }
 }

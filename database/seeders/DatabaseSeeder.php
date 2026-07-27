@@ -23,13 +23,15 @@ class DatabaseSeeder extends Seeder
             DefaultWarehouseSeeder::class,
             DefaultDepartmentSeeder::class,
             RoleAndPermissionSeeder::class,
-            DefaultAdminSeeder::class,
+            DefaultUserSeeder::class,
             DefaultProductCategorySeeder::class,
             DefaultUnitOfMeasureSeeder::class,
             DefaultProductSeeder::class,
             DefaultPaymentTermSeeder::class,
             DefaultBusinessPartnerSeeder::class,
             NumberSeriesSeeder::class,
+            DefaultBomSeeder::class,
+            DefaultQualityControlSeeder::class,
         ]);
     }
 }

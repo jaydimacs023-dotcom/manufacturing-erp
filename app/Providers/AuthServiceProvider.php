@@ -26,6 +26,15 @@ use Modules\Procurement\Policies\GoodsReceiptPolicy;
 use Modules\Procurement\Policies\PurchaseOrderPolicy;
 use Modules\Procurement\Policies\PurchaseRequestPolicy;
 use Modules\Procurement\Policies\SupplierReturnPolicy;
+use Modules\Inventory\Models\InventoryAdjustment;
+use Modules\Inventory\Models\InventoryTransfer;
+use Modules\Inventory\Policies\InventoryAdjustmentPolicy;
+use Modules\Inventory\Policies\InventoryTransferPolicy;
+use Modules\Manufacturing\Models\BillOfMaterial;
+use Modules\Manufacturing\Models\ManufacturingOrder;
+use Modules\Manufacturing\Policies\BillOfMaterialPolicy;
+use Modules\Manufacturing\Policies\ManufacturingOrderPolicy;
+use Modules\Manufacturing\Policies\ProductionPolicy;
 use Modules\ProductMaster\Models\Product;
 use Modules\ProductMaster\Models\ProductCategory;
 use Modules\ProductMaster\Models\ProductSpecification;
@@ -34,6 +43,31 @@ use Modules\ProductMaster\Policies\ProductCategoryPolicy;
 use Modules\ProductMaster\Policies\ProductPolicy;
 use Modules\ProductMaster\Policies\ProductSpecificationPolicy;
 use Modules\ProductMaster\Policies\UnitOfMeasurePolicy;
+use Modules\QualityControl\Models\QualityInspection;
+use Modules\QualityControl\Models\NonConformance;
+use Modules\QualityControl\Models\CorrectiveAction;
+use Modules\QualityControl\Policies\QualityInspectionPolicy;
+use Modules\QualityControl\Policies\NonConformancePolicy;
+use Modules\QualityControl\Policies\CorrectiveActionPolicy;
+use Modules\Warehouse\Models\Putaway;
+use Modules\Warehouse\Models\WarehouseTransfer;
+use Modules\Warehouse\Models\Picking;
+use Modules\Warehouse\Models\Dispatch;
+use Modules\Warehouse\Policies\PutawayPolicy;
+use Modules\Warehouse\Policies\WarehouseTransferPolicy;
+use Modules\Warehouse\Policies\PickingPolicy;
+use Modules\Warehouse\Policies\DispatchPolicy;
+use Modules\Sales\Models\SalesOrder;
+use Modules\Sales\Models\ExportOrder;
+use Modules\Sales\Policies\SalesOrderPolicy;
+use Modules\Sales\Policies\ExportOrderPolicy;
+use Modules\Sales\Policies\ShipmentPolicy;
+use Modules\Accounting\Models\AccountingEvent;
+use Modules\Accounting\Models\JournalMapping;
+use Modules\Accounting\Models\AccountMapping;
+use Modules\Accounting\Policies\AccountingEventPolicy;
+use Modules\Accounting\Policies\AccountMappingPolicy;
+use Modules\Reporting\Policies\ReportPolicy;
 use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
@@ -55,6 +89,29 @@ class AuthServiceProvider extends ServiceProvider
         PurchaseOrder::class => PurchaseOrderPolicy::class,
         GoodsReceipt::class => GoodsReceiptPolicy::class,
         SupplierReturn::class => SupplierReturnPolicy::class,
+InventoryAdjustment::class => InventoryAdjustmentPolicy::class,
+        InventoryTransfer::class => InventoryTransferPolicy::class,
+        BillOfMaterial::class => BillOfMaterialPolicy::class,
+        ManufacturingOrder::class => ManufacturingOrderPolicy::class,
+        QualityInspection::class => QualityInspectionPolicy::class,
+        NonConformance::class => NonConformancePolicy::class,
+        CorrectiveAction::class => CorrectiveActionPolicy::class,
+        Putaway::class => PutawayPolicy::class,
+        WarehouseTransfer::class => WarehouseTransferPolicy::class,
+        Picking::class => PickingPolicy::class,
+Dispatch::class => DispatchPolicy::class,
+
+// Sales & Export
+        SalesOrder::class => SalesOrderPolicy::class,
+        ExportOrder::class => ExportOrderPolicy::class,
+
+        // Reporting
+        // ReportPolicy is registered for the module
+
+        // Accounting
+        AccountingEvent::class => AccountingEventPolicy::class,
+        JournalMapping::class => AccountMappingPolicy::class,
+        AccountMapping::class => AccountMappingPolicy::class,
     ];
 
     public function boot(): void

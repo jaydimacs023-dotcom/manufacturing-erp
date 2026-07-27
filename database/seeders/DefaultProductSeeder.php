@@ -97,19 +97,21 @@ class DefaultProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            DB::table('products')->insert([
-                'uuid' => (string) Str::uuid(),
-                'product_code' => $product['product_code'],
-                'product_name' => $product['product_name'],
-                'product_type' => $product['product_type'],
-                'category_id' => $product['category_id'],
-                'default_uom_id' => $product['default_uom_id'],
-                'description' => $product['description'],
-                'shelf_life_days' => $product['shelf_life_days'] ?? null,
-                'is_active' => true,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]);
+            DB::table('products')->updateOrInsert(
+                ['product_code' => $product['product_code']],
+                [
+                    'uuid' => (string) Str::uuid(),
+                    'product_name' => $product['product_name'],
+                    'product_type' => $product['product_type'],
+                    'category_id' => $product['category_id'],
+                    'default_uom_id' => $product['default_uom_id'],
+                    'description' => $product['description'],
+                    'shelf_life_days' => $product['shelf_life_days'] ?? null,
+                    'is_active' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
         }
     }
 }

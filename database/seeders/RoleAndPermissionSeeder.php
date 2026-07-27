@@ -74,11 +74,11 @@ class RoleAndPermissionSeeder extends Seeder
             'dashboard-view',
         ];
 
-foreach ($permissions as $permission) {
+        foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
-// Create roles and assign permissions
+        // Create roles and assign permissions
         $superAdmin = Role::firstOrCreate(['name' => 'Super Admin', 'guard_name' => 'web']);
         $superAdmin->givePermissionTo(Permission::all());
 
@@ -102,11 +102,12 @@ foreach ($permissions as $permission) {
             'purchase-order-view', 'purchase-order-create', 'purchase-order-update', 'purchase-order-approve', 'purchase-order-send', 'purchase-order-close', 'purchase-order-cancel', 'purchase-order-delete',
             'goods-receipt-view', 'goods-receipt-create', 'goods-receipt-update', 'goods-receipt-complete', 'goods-receipt-cancel', 'goods-receipt-delete',
             'supplier-return-view', 'supplier-return-create', 'supplier-return-update', 'supplier-return-complete', 'supplier-return-cancel', 'supplier-return-delete',
+            'inventory-view', 'inventory-adjust', 'inventory-transfer',
             'dashboard-view',
         ]);
 
-$purchasingOfficer = Role::firstOrCreate(['name' => 'Purchasing Officer', 'guard_name' => 'web']);
-$purchasingOfficer->givePermissionTo([
+        $purchasingOfficer = Role::firstOrCreate(['name' => 'Purchasing Officer', 'guard_name' => 'web']);
+        $purchasingOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
             'product-category-view',
@@ -119,12 +120,14 @@ $purchasingOfficer->givePermissionTo([
             'dashboard-view',
         ]);
 
-$warehouseStaff = Role::firstOrCreate(['name' => 'Warehouse Staff', 'guard_name' => 'web']);
+        $warehouseStaff = Role::firstOrCreate(['name' => 'Warehouse Staff', 'guard_name' => 'web']);
         $warehouseStaff->givePermissionTo([
             'product-view',
             'product-category-view',
             'uom-view',
             'inventory-view',
+            'inventory-adjust',
+            'inventory-transfer',
             'batch-view', 'batch-create',
             'putaway-view', 'putaway-create',
             'picking-view', 'picking-create',
@@ -133,7 +136,7 @@ $warehouseStaff = Role::firstOrCreate(['name' => 'Warehouse Staff', 'guard_name'
             'dashboard-view',
         ]);
 
-$productionSupervisor = Role::firstOrCreate(['name' => 'Production Supervisor', 'guard_name' => 'web']);
+        $productionSupervisor = Role::firstOrCreate(['name' => 'Production Supervisor', 'guard_name' => 'web']);
         $productionSupervisor->givePermissionTo([
             'product-view',
             'product-category-view',
@@ -145,7 +148,7 @@ $productionSupervisor = Role::firstOrCreate(['name' => 'Production Supervisor', 
             'dashboard-view',
         ]);
 
-$qualityInspector = Role::firstOrCreate(['name' => 'Quality Inspector', 'guard_name' => 'web']);
+        $qualityInspector = Role::firstOrCreate(['name' => 'Quality Inspector', 'guard_name' => 'web']);
         $qualityInspector->givePermissionTo([
             'inspection-view', 'inspection-create', 'inspection-approve',
             'non-conformance-view', 'non-conformance-create',
@@ -153,7 +156,7 @@ $qualityInspector = Role::firstOrCreate(['name' => 'Quality Inspector', 'guard_n
             'dashboard-view',
         ]);
 
-$salesOfficer = Role::firstOrCreate(['name' => 'Sales Officer', 'guard_name' => 'web']);
+        $salesOfficer = Role::firstOrCreate(['name' => 'Sales Officer', 'guard_name' => 'web']);
         $salesOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
@@ -165,7 +168,7 @@ $salesOfficer = Role::firstOrCreate(['name' => 'Sales Officer', 'guard_name' => 
             'dashboard-view',
         ]);
 
-$exportOfficer = Role::firstOrCreate(['name' => 'Export Officer', 'guard_name' => 'web']);
+        $exportOfficer = Role::firstOrCreate(['name' => 'Export Officer', 'guard_name' => 'web']);
         $exportOfficer->givePermissionTo([
             'business-partner-view',
             'product-view',
@@ -177,7 +180,7 @@ $exportOfficer = Role::firstOrCreate(['name' => 'Export Officer', 'guard_name' =
             'dashboard-view',
         ]);
 
-$accountingOfficer = Role::firstOrCreate(['name' => 'Accounting Officer', 'guard_name' => 'web']);
+        $accountingOfficer = Role::firstOrCreate(['name' => 'Accounting Officer', 'guard_name' => 'web']);
         $accountingOfficer->givePermissionTo([
             'product-view',
             'product-category-view',
@@ -188,3 +191,4 @@ $accountingOfficer = Role::firstOrCreate(['name' => 'Accounting Officer', 'guard
         ]);
     }
 }
+

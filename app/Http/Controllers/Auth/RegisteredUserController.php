@@ -46,6 +46,22 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect to the designated dashboard based on user role
+        $redirectRoute = 'dashboard';
+        if ($user->can('view-administration')) {
+            $redirectRoute = 'admin.dashboard';
+        } elseif ($user->can('procurement-view')) {
+            $redirectRoute = 'admin.purchase-requests.index';
+        } elseif ($user->can('inventory-view')) {
+            $redirectRoute = 'admin.inventory.index';
+        } elseif ($user->can('manufacturing-order-view')) {
+            $redirectRoute = 'admin.manufacturing.orders.index';
+        } elseif ($user->can('sales-order-view')) {
+            $redirectRoute = 'admin.sales.sales-orders.index';
+        } elseif ($user->can('accounting-event-view')) {
+            $redirectRoute = 'admin.accounting.events.index';
+        }
+
+        return redirect(route($redirectRoute, absolute: false));
     }
 }

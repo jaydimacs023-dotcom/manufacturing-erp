@@ -20,7 +20,10 @@ class DefaultDepartmentSeeder extends Seeder
         ];
 
         foreach ($departments as $dept) {
-            Department::create($dept);
+            Department::firstOrCreate(
+                ['department_code' => $dept['department_code']],
+                $dept
+            );
         }
     }
 }

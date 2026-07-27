@@ -28,7 +28,55 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirect to the designated dashboard based on user role/permissions
+        $redirectRoute = $this->getRedirectRoute();
+
+        return redirect()->intended(route($redirectRoute, absolute: false));
+    }
+
+    /**
+     * Determine the designated dashboard route based on the authenticated user's permissions.
+     */
+    protected function getRedirectRoute(): string
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        // Priority-ordered permission checks for role-based redirect
+        if ($user->can('view-administration')) {
+            return 'admin.dashboard';
+        }
+
+        if ($user->can('procurement-view')) {
+            return 'admin.purchase-requests.index';
+        }
+
+        if ($user->can('inventory-view')) {
+            return 'admin.inventory.index';
+        }
+
+        if ($user->can('manufacturing-order-view')) {
+            return 'admin.manufacturing.orders.index';
+        }
+
+        if ($user->can('inspection-view')) {
+            return 'admin.quality-control.inspections.index';
+        }
+
+        if ($user->can('sales-order-view')) {
+            return 'admin.sales.sales-orders.index';
+        }
+
+        if ($user->can('export-order-view')) {
+            return 'admin.sales.export-orders.index';
+        }
+
+        if ($user->can('accounting-event-view')) {
+            return 'admin.accounting.events.index';
+        }
+
+        // Fallback to the generic dashboard
+        return 'dashboard';
     }
 
     /**
