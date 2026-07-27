@@ -9,7 +9,7 @@
             </span>
             <div>
                 <p class="font-headline text-base font-bold">{{ config('app.name', 'ERP') }}</p>
-                <p class="text-[10px] uppercase tracking-[0.18em] text-emerald-300">Manufacturing System</p>
+                                <p class="text-[10px] uppercase tracking-[0.18em] text-emerald-300">Banana Chips Manufacturing</p>
             </div>
         </div>
         <button onclick="document.getElementById('sidebar').classList.toggle('-translate-x-full')" class="text-emerald-100 lg:hidden">

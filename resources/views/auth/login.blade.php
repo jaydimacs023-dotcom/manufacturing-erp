@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'ERP') }} | Sign In</title>
+    <title>{{ config('app.name', 'Banana Chips Manufacturing System') }} | Sign In</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css'])
@@ -19,13 +19,13 @@
             <section class="hidden flex-col justify-between bg-gradient-to-br from-emerald-900 to-teal-800 p-12 text-white lg:flex">
                 <div class="flex items-center gap-3">
                     <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-300 text-emerald-950">
-                        <svg class="w-[23px] h-[23px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+                        <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                         </svg>
                     </span>
                     <div>
-                        <p class="font-headline text-lg font-bold">{{ config('app.name', 'ERP') }}</p>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-emerald-200">Manufacturing System</p>
+                        <p class="font-headline text-lg font-bold">{{ config('app.name', 'Banana Chips Manufacturing System') }}</p>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-emerald-200">Banana Chips Manufacturing</p>
                     </div>
                 </div>
 
@@ -48,10 +48,10 @@
                     <div class="flex items-center gap-3">
                         <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-800">
                             <svg class="w-[21px] h-[21px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                             </svg>
                         </span>
-                        <b class="font-headline text-lg text-slate-900">{{ config('app.name', 'ERP') }}</b>
+                        <b class="font-headline text-lg text-slate-900">{{ config('app.name', 'Banana Chips Manufacturing System') }}</b>
                     </div>
                 </div>
 
@@ -97,3 +97,36 @@
                                 </template>
                                 <template x-if="show">
                                     <svg class="w-[17px] h-[17px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                    </svg>
+                                </template>
+                            </button>
+                        </span>
+                        @error('password')
+                            <p class="mt-2 text-xs font-medium text-rose-600">{{ $message }}</p>
+                        @enderror
+                    </label>
+
+                    <!-- Remember me -->
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" name="remember" class="h-4 w-4 rounded border-slate-300 text-emerald-700 focus:ring-emerald-500">
+                            <span class="text-xs font-medium text-slate-600">Remember me</span>
+                        </label>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="text-xs font-semibold text-emerald-700 hover:text-emerald-800">Forgot password?</a>
+                        @endif
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-800 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-900/10 transition hover:bg-emerald-900">
+                        Sign in securely
+                    </button>
+                </form>
+
+                <p class="mt-8 text-center text-xs leading-relaxed text-slate-400">Having trouble signing in? Contact your system administrator.</p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
