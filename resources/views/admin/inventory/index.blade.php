@@ -42,17 +42,28 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Stock Cards Table -->
         <x-card title="Stock Cards" description="Current inventory balances" class="lg:col-span-2">
-            <x-table :headers="['Product', 'Warehouse', 'On Hand', 'Reserved', 'Available', 'Batch #', 'Expiry']" :rows="$stockCards->map(fn($card) => (object)[
-                'cells' => [
-                    '<a href="'.route('admin.inventory.stock-card', $card->product_id).'" class="text-blue-600 hover:text-blue-800">'.($card->product->product_name ?? '-').'</a>',
-                    $card->warehouse->warehouse_name ?? '-',
-                    number_format($card->quantity_on_hand, 2),
-                    number_format($card->quantity_reserved, 2),
-                    number_format($card->quantity_available, 2),
-                    $card->batch_number ?? '-',
-                    $card->expiry_date ? $card->expiry_date->format('Y-m-d') : '-',
-                ]
-            )]" empty="No stock cards found.">
+            @php
+                $stockCardRows = $stockCards->map(fn ($card) => (object) [
+                    'cells' => [
+                        new \Illuminate\Support\HtmlString(
+                            '<a href="'.e(route('admin.inventory.stock-card', $card->product_id)).'" class="text-blue-600 hover:text-blue-800">'
+                            .e($card->product->product_name ?? '-')
+                            .'</a>'
+                        ),
+                        $card->warehouse->warehouse_name ?? '-',
+                        number_format($card->quantity_on_hand, 2),
+                        number_format($card->quantity_reserved, 2),
+                        number_format($card->quantity_available, 2),
+                        $card->batch_number ?? '-',
+                        $card->expiry_date ? $card->expiry_date->format('Y-m-d') : '-',
+                    ],
+                ]);
+            @endphp
+            <x-table
+                :headers="['Product', 'Warehouse', 'On Hand', 'Reserved', 'Available', 'Batch #', 'Expiry']"
+                :rows="$stockCardRows"
+                empty="No stock cards found."
+            >
             </x-table>
             <div class="mt-4">
                 {{ $stockCards->links() }}
@@ -96,4 +107,3 @@
     </div>
 </div>
 @endsection
-

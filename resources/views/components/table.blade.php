@@ -27,11 +27,25 @@
                 </thead>
             @endif
             <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($rows as $row)
-                    <tr class="hover:bg-gray-50 transition-colors duration-150">
-                        {{ $row }}
-                    </tr>
-                @empty
+                @if(count($rows) > 0)
+                    @foreach($rows as $row)
+                        <tr class="hover:bg-gray-50 transition-colors duration-150">
+                            @foreach($row->cells ?? $row as $cell)
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                                    @if($cell instanceof \Illuminate\Contracts\Support\Renderable)
+                                        {!! $cell->render() !!}
+                                    @elseif(is_string($cell) && str_starts_with(ltrim($cell), '<'))
+                                        {!! $cell !!}
+                                    @else
+                                        {{ $cell }}
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                @elseif(!$slot->isEmpty())
+                    {{ $slot }}
+                @else
                     <tr>
                         <td colspan="{{ count($headers) }}" class="px-6 py-12 text-center">
                             <div class="flex flex-col items-center">
@@ -47,9 +61,8 @@
                             </div>
                         </td>
                     </tr>
-                @endforelse
+                @endif
             </tbody>
         </table>
     </div>
 </div>
-

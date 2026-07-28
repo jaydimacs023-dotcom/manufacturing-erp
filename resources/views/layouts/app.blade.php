@@ -14,7 +14,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased bg-brand-bg text-text-on-surface min-h-screen">
+<body class="antialiased bg-brand-bg text-text-on-surface min-h-screen" aria-busy="true">
+    <x-page-loader theme="light" />
     <div class="min-h-screen flex">
         <!-- Sidebar -->
         @include('components.sidebar')
@@ -68,4 +69,3 @@
     @stack('scripts')
 </body>
 </html>
-

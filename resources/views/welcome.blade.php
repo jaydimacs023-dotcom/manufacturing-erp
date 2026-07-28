@@ -7,7 +7,7 @@
     <title>{{ config('app.name', 'Banana Chips Manufacturing System') }} | ERP</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800&display=swap" rel="stylesheet" />
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .feature-card {
             transition: all 0.3s ease;
@@ -18,7 +18,8 @@
         }
     </style>
 </head>
-<body class="min-h-screen bg-[#06291f] text-white font-['Figtree',sans-serif]">
+<body class="min-h-screen bg-[#06291f] text-white font-['Figtree',sans-serif]" aria-busy="true">
+    <x-page-loader message="Preparing workspace" />
     <!-- Background gradients -->
     <div class="fixed inset-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle at 15% 20%, #34d399 0, transparent 28%), radial-gradient(circle at 85% 80%, #0d9488 0, transparent 30%);"></div>
 
@@ -284,4 +285,3 @@
     </footer>
 </body>
 </html>
-

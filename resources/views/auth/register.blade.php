@@ -25,7 +25,7 @@
                     </span>
                     <div>
                         <p class="font-headline text-lg font-bold">{{ config('app.name', 'Banana Chips Manufacturing System') }}</p>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-emerald-200">Banana Chips Manufacturing</p>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-emerald-200">Banana Chips Manufacturing System</p>
                     </div>
                 </div>
 

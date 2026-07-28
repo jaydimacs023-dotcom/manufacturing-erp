@@ -23,12 +23,42 @@
     </div>
 
     <x-card>
-        <x-table :headers="['Date', 'Movement #', 'Type', 'Product', 'Warehouse', 'Qty', 'Unit Cost', 'Total', 'Batch #', 'Reference']" :rows="$movements->map(fn($m) => (object)[
-            'cells' => [
-                $m->created_at->format('Y-m-d H:i'),
-                $m->movement_number,
-                '<span class="px-2 py-1 text-xs rounded-full '.($m->quantity > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800').'">'.ucwords(str_replace('_', ' ', $m->movement_type)).'</span>',
-                '<a href="'.route('admin.inventory.stock-card', $m->product_id).'" class="text-blue-600 hover:text-blue-800">'.($m->product->product_name ?? '-').'</a>',
-                $m->warehouse->warehouse_name ?? '-',
-                number_format($m->quantity, 4),
-                number_format($m->
+        @php
+            $movementRows = $movements->map(fn ($movement) => (object) [
+                'cells' => [
+                    $movement->created_at->format('Y-m-d H:i'),
+                    $movement->movement_number,
+                    new \Illuminate\Support\HtmlString(
+                        '<span class="px-2 py-1 text-xs rounded-full '
+                        .($movement->quantity > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800')
+                        .'">'.e(ucwords(str_replace('_', ' ', $movement->movement_type))).'</span>'
+                    ),
+                    new \Illuminate\Support\HtmlString(
+                        '<a href="'.e(route('admin.inventory.stock-card', $movement->product_id)).'" class="text-blue-600 hover:text-blue-800">'
+                        .e($movement->product->product_name ?? '-')
+                        .'</a>'
+                    ),
+                    $movement->warehouse->warehouse_name ?? '-',
+                    number_format($movement->quantity, 4),
+                    number_format($movement->unit_cost, 2),
+                    number_format($movement->total_cost, 2),
+                    $movement->batch_number ?? '-',
+                    $movement->reference_type
+                        ? ucwords(str_replace('_', ' ', $movement->reference_type)).' #'.$movement->reference_id
+                        : '-',
+                ],
+            ]);
+        @endphp
+
+        <x-table
+            :headers="['Date', 'Movement #', 'Type', 'Product', 'Warehouse', 'Qty', 'Unit Cost', 'Total', 'Batch #', 'Reference']"
+            :rows="$movementRows"
+            empty="No movements found."
+        />
+
+        <div class="mt-4">
+            {{ $movements->links() }}
+        </div>
+    </x-card>
+</div>
+@endsection
