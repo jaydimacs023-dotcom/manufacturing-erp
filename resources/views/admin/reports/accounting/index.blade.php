@@ -20,3 +20,19 @@
     </div>
 
     <x-card title="Recent Accounting Events" description="Latest events">
+        <x-table :headers="['Event #', 'Type', 'Status', 'Amount', 'Date']" :rows="collect($recent_events ?? [])->map(fn($e) => (object)[
+            'cells' => [
+                $e->event_number ?? '-',
+                ucwords(str_replace('_', ' ', $e->transaction_type ?? '')),
+                view('components.badge', ['status' => ($e->status ?? 'pending') === 'posted' ? 'active' : (($e->status ?? '') === 'failed' ? 'inactive' : 'info')])->with('slot', ucfirst($e->status ?? 'Pending'))->render(),
+                number_format($e->total_amount ?? 0, 2),
+                $e->created_at ? $e->created_at->format('Y-m-d') : '-',
+            ]
+        ])" empty="No accounting events found." />
+    </x-card>
+
+    <div class="flex items-center justify-end">
+        <x-button variant="secondary" href="{{ route('admin.reports.index') }}">Back to Reports</x-button>
+    </div>
+</div>
+@endsection

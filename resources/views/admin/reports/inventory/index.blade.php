@@ -37,4 +37,14 @@
             'cells' => [
                 $sc->product?->product_name ?? '-',
                 $sc->product?->sku ?? '-',
-                number_format($sc->quantity
+                number_format($sc->quantity_on_hand, 2),
+                number_format($sc->min_stock_level ?? 0, 2),
+            ]
+        ])" empty="No stock cards found." />
+    </x-card>
+
+    <div class="flex items-center justify-end">
+        <x-button variant="secondary" href="{{ route('admin.reports.index') }}">Back to Reports</x-button>
+    </div>
+</div>
+@endsection
