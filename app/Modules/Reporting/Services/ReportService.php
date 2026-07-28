@@ -64,12 +64,12 @@ class ReportService
             'pending_adjustments' => InventoryAdjustment::where('status', 'draft')->count(),
             'active_reservations' => StockReservation::where('status', 'active')->count(),
             'low_stock_products' => DB::table('stock_cards')
-                ->join('products', 'stock_cards.product_id', '=', 'products.id')
-                ->whereColumn('stock_cards.quantity', '<=', 'products.minimum_stock')
+                ->where('quantity_available', '>', 0)
+                ->where('quantity_available', '<=', 10)
                 ->count(),
             'recent_movements' => InventoryMovement::with(['product', 'warehouse'])
                 ->orderBy('created_at', 'desc')->take(20)->get(),
-            'stock_cards' => StockCard::with('product')->orderBy('quantity', 'asc')->take(50)->get(),
+            'stock_cards' => StockCard::with('product')->orderBy('quantity_available')->take(50)->get(),
         ];
     }
 
@@ -82,7 +82,7 @@ class ReportService
         if (!empty($filters['date_to'])) $moQuery->whereDate('created_at', '<=', $filters['date_to']);
         if (!empty($filters['status'])) $moQuery->where('status', $filters['status']);
 
-        $totalOutput = ProductionOutput::sum('quantity');
+        $totalOutput = ProductionOutput::sum('quantity_produced');
         $totalWaste = WasteRecord::sum('quantity');
         $yieldPercent = $totalOutput > 0
             ? round(($totalOutput / ($totalOutput + $totalWaste)) * 100, 2)
@@ -187,7 +187,7 @@ class ReportService
 
     public function executiveSummary(): array
     {
-        $totalOutput = ProductionOutput::sum('quantity');
+        $totalOutput = ProductionOutput::sum('quantity_produced');
         $totalWaste = WasteRecord::sum('quantity');
         $yieldPercent = $totalOutput > 0
             ? round(($totalOutput / ($totalOutput + $totalWaste)) * 100, 2)
@@ -195,7 +195,7 @@ class ReportService
 
         return [
             // Production
-            'production_today' => ProductionOutput::whereDate('created_at', today())->sum('quantity'),
+            'production_today' => ProductionOutput::whereDate('created_at', today())->sum('quantity_produced'),
             'active_orders' => ManufacturingOrder::whereIn('status', ['released', 'in_progress'])->count(),
             'yield_percentage' => $yieldPercent,
             'waste_percentage' => $yieldPercent > 0 ? round(100 - $yieldPercent, 2) : 0,
@@ -207,8 +207,8 @@ class ReportService
 
             // Inventory
             'low_stock_count' => DB::table('stock_cards')
-                ->join('products', 'stock_cards.product_id', '=', 'products.id')
-                ->whereColumn('stock_cards.quantity', '<=', 'products.minimum_stock')
+                ->where('quantity_available', '>', 0)
+                ->where('quantity_available', '<=', 10)
                 ->count(),
             'pending_dispatches' => Dispatch::whereIn('status', ['draft', 'packed', 'loaded'])->count(),
             'active_reservations' => StockReservation::where('status', 'active')->count(),
@@ -226,4 +226,3 @@ class ReportService
         ];
     }
 }
-
