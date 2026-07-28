@@ -17,15 +17,29 @@
         @endcan
     </div>
 
-    <x-table :headers="['Transaction Type', 'Debit Account', 'Credit Account', 'Active', 'Actions']" :rows="$journalMappings->map(fn($m) => (object)[
-        'cells' => [
-            ucwords(str_replace('_', ' ', $m->transaction_type)),
-            $m->debit_account_code ? $m->debit_account_code . ' - ' . $m->debit_account_name : '-',
-            $m->credit_account_code ? $m->credit_account_code . ' - ' . $m->credit_account_name : '-',
-            view('components.badge', ['status' => $m->is_active ? 'active' : 'inactive'])->with('slot', $m->is_active ? 'Active' : 'Inactive'),
-            '<a href="' . route('admin.accounting.mappings.edit-journal', $m) . '" class="text-blue-600 hover:text-blue-800">Edit</a>',
-        ]
-    ])" empty="No journal mappings found.">
+    @php
+        $journalMappingRows = $journalMappings->map(fn ($mapping) => (object) [
+            'cells' => [
+                ucwords(str_replace('_', ' ', $mapping->transaction_type)),
+                $mapping->debit_account_code
+                    ? $mapping->debit_account_code . ' - ' . $mapping->debit_account_name
+                    : '-',
+                $mapping->credit_account_code
+                    ? $mapping->credit_account_code . ' - ' . $mapping->credit_account_name
+                    : '-',
+                view('components.badge', [
+                    'status' => $mapping->is_active ? 'active' : 'inactive',
+                ])->with('slot', $mapping->is_active ? 'Active' : 'Inactive'),
+                '<a href="' . route('admin.accounting.mappings.edit-journal', $mapping) . '" class="text-blue-600 hover:text-blue-800">Edit</a>',
+            ],
+        ]);
+    @endphp
+
+    <x-table
+        :headers="['Transaction Type', 'Debit Account', 'Credit Account', 'Active', 'Actions']"
+        :rows="$journalMappingRows"
+        empty="No journal mappings found."
+    >
     </x-table>
 
     <div class="mt-8 flex items-center justify-between">
@@ -40,16 +54,26 @@
         @endcan
     </div>
 
-    <x-table :headers="['Type', 'Source', 'Account', 'Direction', 'Active', 'Actions']" :rows="$accountMappings->map(fn($m) => (object)[
-        'cells' => [
-            ucfirst($m->mapping_type),
-            ucfirst($m->source_type),
-            $m->account_code . ' - ' . $m->account_name,
-            ucfirst($m->direction),
-            view('components.badge', ['status' => $m->is_active ? 'active' : 'inactive'])->with('slot', $m->is_active ? 'Active' : 'Inactive'),
-            '<a href="' . route('admin.accounting.mappings.edit-account', $m) . '" class="text-blue-600 hover:text-blue-800">Edit</a>',
-        ]
-    ])" empty="No account mappings found.">
+    @php
+        $accountMappingRows = $accountMappings->map(fn ($mapping) => (object) [
+            'cells' => [
+                ucfirst($mapping->mapping_type),
+                ucfirst($mapping->source_type),
+                $mapping->account_code . ' - ' . $mapping->account_name,
+                ucfirst($mapping->direction),
+                view('components.badge', [
+                    'status' => $mapping->is_active ? 'active' : 'inactive',
+                ])->with('slot', $mapping->is_active ? 'Active' : 'Inactive'),
+                '<a href="' . route('admin.accounting.mappings.edit-account', $mapping) . '" class="text-blue-600 hover:text-blue-800">Edit</a>',
+            ],
+        ]);
+    @endphp
+
+    <x-table
+        :headers="['Type', 'Source', 'Account', 'Direction', 'Active', 'Actions']"
+        :rows="$accountMappingRows"
+        empty="No account mappings found."
+    >
     </x-table>
 </div>
 @endsection

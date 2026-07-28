@@ -25,16 +25,30 @@
         </div>
     </div>
 
-    <x-table :headers="['Queue #', 'Event #', 'Status', 'Retry', 'Error', 'Actions']" :rows="$queueItems->map(fn($q) => (object)[
-        'cells' => [
-            $q->queue_number,
-            $q->accountingEvent->event_number ?? '-',
-            view('components.badge', ['status' => $q->status === 'posted' ? 'active' : ($q->status === 'failed' ? 'inactive' : 'info')])->with('slot', ucfirst($q->status)),
-            "{$q->retry_count}/{$q->max_retries}",
-            $q->error_message ? \Illuminate\Support\Str::limit($q->error_message, 50) : '-',
-            view('admin.accounting.posting-queue._actions', ['queue' => $q])->render(),
-        ]
-    ])" empty="No posting queue items found.">
+    @php
+        $queueRows = $queueItems->map(fn ($queueItem) => (object) [
+            'cells' => [
+                $queueItem->queue_number,
+                $queueItem->accountingEvent->event_number ?? '-',
+                view('components.badge', [
+                    'status' => $queueItem->status === 'posted'
+                        ? 'active'
+                        : ($queueItem->status === 'failed' ? 'inactive' : 'info'),
+                ])->with('slot', ucfirst($queueItem->status)),
+                "{$queueItem->retry_count}/{$queueItem->max_retries}",
+                $queueItem->error_message
+                    ? \Illuminate\Support\Str::limit($queueItem->error_message, 50)
+                    : '-',
+                view('admin.accounting.posting-queue._actions', ['queue' => $queueItem])->render(),
+            ],
+        ]);
+    @endphp
+
+    <x-table
+        :headers="['Queue #', 'Event #', 'Status', 'Retry', 'Error', 'Actions']"
+        :rows="$queueRows"
+        empty="No posting queue items found."
+    >
     </x-table>
 
     <div class="mt-4">

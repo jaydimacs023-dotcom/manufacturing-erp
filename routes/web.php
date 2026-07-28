@@ -419,7 +419,7 @@ Route::middleware('auth')->group(function () {
                 ->name('accounting.export');
 
             // Executive Dashboard
-            Route::get('/executive', [ReportController::class, 'executiveDashboard'])
+            Route::get('/executive', [ReportController::class, 'executive'])
                 ->name('executive');
         });
 
