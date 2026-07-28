@@ -20,3 +20,7 @@
 ## Phase 5: Role-Based Redirect ✅
 - [x] 10. AuthenticatedSessionController - role-based redirect after login
 - [x] 11. RegisteredUserController - role-based redirect after registration
+
+## Phase 6: Welcome Page & Auth Pages ✅
+- [x] 12. Rewrote welcome.blade.php (branded landing page with system identity, features, and auth links)
+- [x] 13. Rewrote auth/register.blade.php (two-panel registration page matching login format)
