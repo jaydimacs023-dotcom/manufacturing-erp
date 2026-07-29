@@ -47,7 +47,6 @@
                     </svg>
                 </button>
                 <div x-show="open" class="space-y-1 pl-4 mt-1">
-                    <a href="{{ route('admin.dashboard') }}" class="sidebar-sub-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Admin Dashboard</a>
                     <a href="{{ route('admin.users.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Users</a>
                     <a href="{{ route('admin.roles.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">Roles</a>
                     <a href="{{ route('admin.branches.index') }}" class="sidebar-sub-link {{ request()->routeIs('admin.branches.*') ? 'active' : '' }}">Branches</a>
@@ -320,4 +319,3 @@
 
 <!-- Mobile overlay -->
 <div class="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-sm lg:hidden hidden" id="sidebar-overlay" onclick="document.getElementById('sidebar').classList.toggle('-translate-full'); this.classList.toggle('hidden');"></div>
-
