@@ -5,60 +5,61 @@
 
 <div
     data-page-loader
-    data-theme="{{ $theme }}"
     role="status"
     aria-live="polite"
     aria-label="{{ $message }}"
 >
-    <span class="page-loader__spinner" aria-hidden="true"></span>
+    <span class="sr-only">{{ $message }}</span>
+    <span class="page-loader__bar" aria-hidden="true"></span>
 </div>
 
 @once
     <style>
         [data-page-loader] {
             position: fixed;
-            inset: 0;
+            top: 0;
+            right: 0;
+            left: 0;
             z-index: 9999;
-            display: grid;
-            place-items: center;
-            padding: 1.5rem;
-            color: #d1fae5;
-            background: rgba(6, 41, 31, .96);
+            height: 3px;
+            overflow: hidden;
             opacity: 1;
             visibility: visible;
-            pointer-events: auto;
+            pointer-events: none;
             transition: opacity 180ms ease, visibility 0s linear 180ms;
         }
         [data-page-loader][aria-hidden="true"] {
             opacity: 0;
             visibility: hidden;
-            pointer-events: none;
         }
-        .page-loader__spinner {
-            width: 2.75rem;
-            height: 2.75rem;
-            border: 2px solid rgba(110, 231, 183, .28);
-            border-top-color: #6ee7b7;
-            border-radius: 50%;
-            animation: page-loader-spin 900ms linear infinite;
+        .page-loader__bar {
+            position: absolute;
+            inset-block: 0;
+            left: 0;
+            width: 38%;
+            border-radius: 0 999px 999px 0;
+            background: linear-gradient(90deg, #047857, #34d399, #a7f3d0);
+            box-shadow: 0 0 10px rgba(16, 185, 129, .75);
+            animation: page-loader-progress 1.15s ease-in-out infinite;
+            transform-origin: left center;
+            will-change: transform;
         }
-        [data-page-loader][data-theme="light"] {
-            color: #064e3b;
-            background: rgba(248, 250, 252, .97);
+        @keyframes page-loader-progress {
+            0% {
+                transform: translateX(-105%) scaleX(.55);
+            }
+            55% {
+                transform: translateX(115%) scaleX(1.15);
+            }
+            100% {
+                transform: translateX(275%) scaleX(.65);
+            }
         }
-        [data-page-loader][data-theme="light"] .page-loader__spinner {
-            border-color: #d1fae5;
-            border-top-color: #047857;
-        }
-        @keyframes page-loader-spin { to { transform: rotate(360deg); } }
         @media (prefers-reduced-motion: reduce) {
             [data-page-loader] { transition-duration: 1ms; }
-            .page-loader__spinner {
+            .page-loader__bar {
                 animation: none;
-                border-color: #6ee7b7;
-            }
-            [data-page-loader][data-theme="light"] .page-loader__spinner {
-                border-color: #047857;
+                width: 70%;
             }
         }
     </style>
